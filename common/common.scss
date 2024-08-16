@@ -1,0 +1,44 @@
+// Improve compatibility with the Topic List Thumbnails Theme Component
+.topic-thumbnails-grid,
+.topic-thumbnails-masonry {
+  &:has(.topic-list-item .filter-created) td.num.activity {
+    display: none;
+  }
+
+  td.topic-list-data.created:not(.filter-created) {
+    display: none;
+  }
+  td.topic-list-data.created.filter-created {
+    z-index: 2;
+    position: relative;
+    background-color: rgba(var(--primary-low-rgb), 0.85);
+    max-width: none;
+    grid-area: activity;
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+    padding: 10px;
+    a {
+      padding: 0;
+      margin-top: auto;
+    }
+  }
+}
+
+.topic-thumbnails-minimal td.topic-list-data.created {
+  display: none;
+}
+
+// I don't like it, but blog style completely introduces its own template and doesn't have any plugin outlets to hook into
+.topic-thumbnails-blog-style-grid {
+  td.topic-list-data.created {
+    display: block;
+    color: var(--primary-low-mid);
+    font-size: var(--font-down-1);
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: unset;
+  }
+}

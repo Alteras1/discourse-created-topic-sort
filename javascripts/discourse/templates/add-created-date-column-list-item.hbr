@@ -1,5 +1,5 @@
 {{#unless view.mobileView}}
-  <td class="num topic-list-data created" title="{{html-safe topic.createdAtTitle}}">
+  <td class="num topic-list-data created {{#if view.currentOrderIsCreated}}filter-created{{/if}}" title="{{html-safe topic.createdAtTitle}}">
     <a class="post-activity" href="{{topic.firstPostUrl}}">
       {{~format-date topic.createdAt format="tiny" noTitle="true"~}}
     </a>

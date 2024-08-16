@@ -35,3 +35,13 @@
     }
   }
 }
+
+// prevent standard display in topic list thumbnail blog style
+.topic-thumbnails-blog-style-grid,
+.topic-thumbnails-grid,
+.topic-thumbnails-masonry,
+.topic-thumbnails-minimal {
+  .topic-item-stats__mobile-created-date {
+    display: none;
+  }
+}

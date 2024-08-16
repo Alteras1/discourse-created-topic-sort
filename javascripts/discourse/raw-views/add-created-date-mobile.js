@@ -1,17 +1,13 @@
 import EmberObject from "@ember/object";
 import { relativeAge } from "discourse/lib/formatter";
+import discourseComputed from "discourse-common/utils/decorators";
 
 export default class extends EmberObject {
-  init() {
-    super.init(...arguments);
-    this.addObserver("session.topicList", this, () => {
-      this.notifyPropertyChange("currentOrderIsCreated");
-    });
-  }
   get mobileView() {
     return this.site.mobileView;
   }
-  get currentOrderIsCreated() {
+  @discourseComputed("session.topicList")
+  currentOrderIsCreated() {
     return this.session.topicList.params.order === "created";
   }
   get createdBumpedSame() {
