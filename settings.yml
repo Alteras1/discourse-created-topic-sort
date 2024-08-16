@@ -3,3 +3,9 @@ enable_sort_by_created_date_nav_bar_item:
   type: bool
   description:
     en: Add a "Sort by Created Date" nav bar item.
+
+enable_column_on_created_date_filter_only:
+  default: false
+  type: bool
+  description:
+    en: Add the "Created" column only when the "Sort by Created Date" nav bar item is selected.
