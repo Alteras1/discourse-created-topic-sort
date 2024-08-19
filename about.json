@@ -5,7 +5,7 @@
   "about_url": "https://meta.discourse.org/t/created-topic-sort/321521",
   "license_url": "https://github.com/Alteras1/discourse-created-topic-sort/blob/main/LICENSE",
   "learn_more": "Adds the created date to the topic list and allows users to sort by it.",
-  "theme_version": "1.0.0",
+  "theme_version": "1.0.1",
   "minimum_discourse_version": "3.0.0",
   "maximum_discourse_version": null,
   "assets": {},
