@@ -5,7 +5,7 @@ import discourseComputed from "discourse-common/utils/decorators";
 export default class extends EmberObject {
   @discourseComputed("session.topicList")
   currentOrderIsCreated() {
-    return this.session.topicList.params.order === "created";
+    return this.session.topicList?.params.order === "created";
   }
   get mobileView() {
     const topicThumbnailService = getOwner(this).lookup(

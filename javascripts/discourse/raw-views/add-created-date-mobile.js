@@ -8,7 +8,7 @@ export default class extends EmberObject {
   }
   @discourseComputed("session.topicList")
   currentOrderIsCreated() {
-    return this.session.topicList.params.order === "created";
+    return this.session.topicList?.params.order === "created";
   }
   get createdBumpedSame() {
     const bumpedRel = relativeAge(this.topic.bumpedAt);
