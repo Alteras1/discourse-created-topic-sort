@@ -38,13 +38,13 @@ export default class CreatedDateMobileItem extends Component {
   {{#if this.currentOrderIsCreated}}
     {{#unless this.createdBumpedSame}}
       <div class="topic-item-stats__mobile-created-date age" data-has-created>
-        <a href="{{@outletArgs.topic.lastPostUrl}}">{{formatDate
+        <a href={{@outletArgs.topic.lastPostUrl}}>{{formatDate
             @outletArgs.topic.bumpedAt
             format="tiny"
             noTitle="true"
           }}</a>
         /
-        <a href="{{@outletArgs.topic.firstPostUrl}}">{{formatDate
+        <a href={{@outletArgs.topic.firstPostUrl}}>{{formatDate
             @outletArgs.topic.createdAt
             format="tiny"
             noTitle="true"
