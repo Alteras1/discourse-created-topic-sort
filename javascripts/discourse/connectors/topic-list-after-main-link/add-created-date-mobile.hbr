@@ -1,1 +1,2 @@
+{{!-- has-modern-replacement --}}
 {{~raw "add-created-date-mobile" topic=context.topic}}

@@ -2,9 +2,11 @@ import { apiInitializer } from "discourse/lib/api";
 import { longDate } from "discourse/lib/formatter";
 import NavItem from "discourse/models/nav-item";
 import I18n from "I18n";
-// import TopicListHeaderCreatedColumn from "../components/topic-list-header-created-column";
+import CreatedDateHeader from "../components/created-date-header";
+import CreatedDateItem from "../components/created-date-item";
+import CreatedDateMobileItem from "../components/created-date-mobile-item";
 
-export default apiInitializer("1.30.0", (api) => {
+export default apiInitializer("1.38.0", (api) => {
   if (settings.enable_sort_by_created_date_nav_bar_item) {
     api.addNavigationBarItem({
       name: "created_date",
@@ -32,13 +34,14 @@ export default apiInitializer("1.30.0", (api) => {
     },
   });
 
-  // note to self: don't use the topic-list-header.gjs
-  // it is behind the experimental glimmer topic list groups
-  // Once it is ready, can use the following:
-  // api.renderInOutlet("topic-list-header-after", TopicListHeaderCreatedColumn);
+  api.registerValueTransformer("topic-list-columns", ({ value: cols }) => {
+    cols.add("created", {
+      header: CreatedDateHeader,
+      item: CreatedDateItem,
+    });
+    return cols;
+  });
 
-  // see for alternative:
-  // https://meta.discourse.org/t/new-th-in-topic-table/280116/2
-  // https://meta.discourse.org/t/an-interesting-strategy-for-passing-properties-via-raw-template-plugin-outlets/210054/2
-  // https://meta.discourse.org/t/how-to-implement-raw-plugin-outlet/178385
+  // outlet is only in mobile view
+  api.renderInOutlet("topic-list-after-main-link", CreatedDateMobileItem);
 });
