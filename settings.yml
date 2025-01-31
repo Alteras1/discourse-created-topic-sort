@@ -9,3 +9,29 @@ enable_column_on_created_date_filter_only:
   type: bool
   description:
     en: Add the "Created" column only when the "Sort by Created Date" nav bar item is selected.
+
+enable_nav_bar_item_in_home_page:
+  default: true
+  type: bool
+  description:
+    en: Add the "Sort by Created Date" nav bar item in the home page.
+
+enable_column_in_home_page:
+  default: true
+  type: bool
+  description:
+    en: Add the "Created" column in the home page.
+
+categories_to_display_nav_bar_item:
+  default: ""
+  type: list
+  list_type: category
+  description:
+    en: List of categories to display in the "Sort by Created Date" nav bar item. Leave empty to display in all categories.
+
+categories_to_display_created_column:
+  default: ""
+  type: list
+  list_type: category
+  description:
+    en: List of categories to display the "Created" column. Leave empty to display in all categories.

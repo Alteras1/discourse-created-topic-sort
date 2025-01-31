@@ -46,7 +46,7 @@ export default class CreatedDateItem extends Component {
       <td
         title={{htmlSafe @topic.createdAtTitle}}
         class={{concatClass
-          "num topic-list-data created"
+          "num topic-list-data created age"
           (if this.currentOrderIsCreated "filter-created")
         }}
       >
