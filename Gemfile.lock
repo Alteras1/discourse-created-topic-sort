@@ -92,6 +92,7 @@ GEM
     uri (1.0.3)
 
 PLATFORMS
+  arm64-darwin-23
   ruby
 
 DEPENDENCIES
