@@ -1,9 +1,0 @@
-{{#unless view.mobileView}}
-  {{~raw "topic-list-header-column"
-    sortable=sortable
-    order='created'
-    forceName=(theme-i18n "created_date_title")
-    number='true'
-    ariaLabel=(theme-i18n "sr_created_date_title")
-    parent=../parent}}
-{{/unless}}

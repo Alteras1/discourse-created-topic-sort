@@ -1,15 +1,3 @@
-@if $enable_column_on_created_date_filter_only == "true" {
-  // only for non-glimmer compatible themes
-  .topic-list {
-    th.created:not([aria-sort]) {
-      display: none;
-    }
-    td.topic-list-data.created:not(.filter-created) {
-      display: none;
-    }
-  }
-}
-
 // Improve compatibility with the Topic List Thumbnails Theme Component
 .topic-thumbnails-grid,
 .topic-thumbnails-masonry {

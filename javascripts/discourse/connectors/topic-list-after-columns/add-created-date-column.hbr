@@ -1,2 +1,0 @@
-{{!-- has-modern-replacement --}}
-{{~raw "add-created-date-column-list-item" topic=context.topic}}
