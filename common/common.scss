@@ -8,16 +8,18 @@
   td.topic-list-data.created:not(.filter-created) {
     display: none;
   }
+
   td.topic-list-data.created.filter-created {
     z-index: 2;
     position: relative;
-    background-color: rgba(var(--primary-low-rgb), 0.85);
+    background-color: rgb(var(--primary-low-rgb), 0.85);
     max-width: none;
     grid-area: activity;
     display: flex;
     justify-content: flex-end;
     width: auto;
     padding: 10px;
+
     a {
       padding: 0;
       margin-top: auto;

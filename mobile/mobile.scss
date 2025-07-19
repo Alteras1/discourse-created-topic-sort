@@ -1,5 +1,6 @@
 .topic-item-metadata {
   position: relative;
+
   .topic-item-stats__mobile-created-date {
     position: absolute;
     bottom: 0;
@@ -14,21 +15,25 @@
     }
   }
 }
+
 .topic-list
   .topic-item-metadata:has(
     > .topic-item-stats__mobile-created-date[data-has-created]
   )
   .topic-item-stats {
   flex-flow: row wrap;
+
   .num.activity {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     display: inline-block;
     position: relative;
+
     .age.activity .relative-date {
       width: 0;
       font-stretch: ultra-condensed;
+
       &::before {
         content: attr(data-time);
       }
