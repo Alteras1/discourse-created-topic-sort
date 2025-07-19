@@ -1,11 +1,11 @@
 import Component from "@glimmer/component";
-import { getOwner } from '@ember/application';
-import { hash } from "@ember/helper";
+import { getOwner } from "@ember/application";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
 import PluginOutlet from "discourse/components/plugin-outlet";
 import concatClass from "discourse/helpers/concat-class";
 import formatDate from "discourse/helpers/format-date";
+import lazyHash from "discourse/helpers/lazy-hash";
 
 export default class CreatedDateItem extends Component {
   @service session;
@@ -20,13 +20,16 @@ export default class CreatedDateItem extends Component {
   }
 
   get showCreatedDate() {
-    return (settings.enable_column_on_created_date_filter_only && this.currentOrderIsCreated)
-            || !settings.enable_column_on_created_date_filter_only;
+    return (
+      (settings.enable_column_on_created_date_filter_only &&
+        this.currentOrderIsCreated) ||
+      !settings.enable_column_on_created_date_filter_only
+    );
   }
 
   get mobileView() {
     const topicThumbnailService = getOwner(this).lookup(
-      "service:topic-thumbnails",
+      "service:topic-thumbnails"
     );
     if (
       topicThumbnailService?.get("displayBlogStyle") ||
@@ -42,24 +45,24 @@ export default class CreatedDateItem extends Component {
 
   <template>
     {{#unless this.mobileView}}
-    {{#if this.showCreatedDate}}
-      <td
-        title={{htmlSafe @topic.createdAtTitle}}
-        class={{concatClass
-          "num topic-list-data created age"
-          (if this.currentOrderIsCreated "filter-created")
-        }}
-      >
-        <a href={{@topic.firstPostUrl}} class="post-activity">
-          {{~! no whitespace ~}}
-          <PluginOutlet
-            @name="topic-list-before-relative-created-date"
-            @outletArgs={{hash topic=@topic}}
-          />
-          {{~formatDate @topic.createdAt format="tiny" noTitle="true"~}}
-        </a>
-      </td>
-    {{/if}}
+      {{#if this.showCreatedDate}}
+        <td
+          title={{htmlSafe @topic.createdAtTitle}}
+          class={{concatClass
+            "num topic-list-data created age"
+            (if this.currentOrderIsCreated "filter-created")
+          }}
+        >
+          <a href={{@topic.firstPostUrl}} class="post-activity">
+            {{~! no whitespace ~}}
+            <PluginOutlet
+              @name="topic-list-before-relative-created-date"
+              @outletArgs={{lazyHash topic=@topic}}
+            />
+            {{~formatDate @topic.createdAt format="tiny" noTitle="true"~}}
+          </a>
+        </td>
+      {{/if}}
     {{/unless}}
   </template>
 }

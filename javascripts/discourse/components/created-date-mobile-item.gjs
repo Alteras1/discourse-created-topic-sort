@@ -15,8 +15,11 @@ export default class CreatedDateMobileItem extends Component {
   }
 
   get showCreatedDate() {
-    return (settings.enable_column_on_created_date_filter_only && this.currentOrderIsCreated)
-            || !settings.enable_column_on_created_date_filter_only;
+    return (
+      (settings.enable_column_on_created_date_filter_only &&
+        this.currentOrderIsCreated) ||
+      !settings.enable_column_on_created_date_filter_only
+    );
   }
 
   get createdBumpedSame() {
@@ -27,30 +30,34 @@ export default class CreatedDateMobileItem extends Component {
       moment(this.args.outletArgs.topic.bumpedAt).isValid() &&
       moment(this.args.outletArgs.topic.createdAt).isValid()
     ) {
-      const bumpedAtStr = moment(this.args.outletArgs.topic.bumpedAt).format(BUMPED_FORMAT);
-      const createdAtStr = moment(this.args.outletArgs.topic.createdAt).format(BUMPED_FORMAT);
+      const bumpedAtStr = moment(this.args.outletArgs.topic.bumpedAt).format(
+        BUMPED_FORMAT
+      );
+      const createdAtStr = moment(this.args.outletArgs.topic.createdAt).format(
+        BUMPED_FORMAT
+      );
       return bumpedAtStr === createdAtStr && bumpedRel === createdRel;
     }
     return true;
   }
 
   <template>
-  {{#if this.currentOrderIsCreated}}
-    {{#unless this.createdBumpedSame}}
-      <div class="topic-item-stats__mobile-created-date age" data-has-created>
-        <a href={{@outletArgs.topic.lastPostUrl}}>{{formatDate
-            @outletArgs.topic.bumpedAt
-            format="tiny"
-            noTitle="true"
-          }}</a>
-        /
-        <a href={{@outletArgs.topic.firstPostUrl}}>{{formatDate
-            @outletArgs.topic.createdAt
-            format="tiny"
-            noTitle="true"
-          }}</a>
-      </div>
-    {{/unless}}
-  {{/if}}
+    {{#if this.currentOrderIsCreated}}
+      {{#unless this.createdBumpedSame}}
+        <div class="topic-item-stats__mobile-created-date age" data-has-created>
+          <a href={{@outletArgs.topic.lastPostUrl}}>{{formatDate
+              @outletArgs.topic.bumpedAt
+              format="tiny"
+              noTitle="true"
+            }}</a>
+          /
+          <a href={{@outletArgs.topic.firstPostUrl}}>{{formatDate
+              @outletArgs.topic.createdAt
+              format="tiny"
+              noTitle="true"
+            }}</a>
+        </div>
+      {{/unless}}
+    {{/if}}
   </template>
 }

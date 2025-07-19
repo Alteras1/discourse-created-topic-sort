@@ -1,7 +1,7 @@
 import { apiInitializer } from "discourse/lib/api";
 import { longDate } from "discourse/lib/formatter";
 import NavItem from "discourse/models/nav-item";
-import I18n from "I18n";
+import { i18n } from "discourse-i18n";
 import CreatedDateHeader from "../components/created-date-header";
 import CreatedDateItem from "../components/created-date-item";
 import CreatedDateMobileItem from "../components/created-date-mobile-item";
@@ -10,8 +10,8 @@ export default apiInitializer("1.38.0", (api) => {
   if (settings.enable_sort_by_created_date_nav_bar_item) {
     api.addNavigationBarItem({
       name: "created_date",
-      displayName: I18n.t(themePrefix("filters.created_date.title")),
-      title: I18n.t(themePrefix("filters.created_date.help")),
+      displayName: i18n(themePrefix("filters.created_date.title")),
+      title: i18n(themePrefix("filters.created_date.help")),
       before: "top",
       customFilter: (category) => {
         if (!category) {
@@ -45,7 +45,7 @@ export default apiInitializer("1.38.0", (api) => {
   api.modifyClass("model:topic", {
     pluginId: "created-date",
     get createdAtTitle() {
-      return I18n.t("topic.created_at", { date: longDate(this.createdAt) });
+      return i18n("topic.created_at", { date: longDate(this.createdAt) });
     },
   });
 
@@ -86,7 +86,7 @@ export default apiInitializer("1.38.0", (api) => {
         cols.add("created", createdCol);
       }
       return cols;
-    },
+    }
   );
 
   // outlet is only in mobile view
