@@ -1,25 +1,56 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
+import { and } from "truth-helpers";
 import formatDate from "discourse/helpers/format-date";
 import { relativeAge } from "discourse/lib/formatter";
 
 export default class CreatedDateMobileItem extends Component {
-  @service session;
+  @service router;
+  @service topicTrackingState;
 
-  constructor() {
-    super(...arguments);
-  }
-
+  /**
+   * Check if the current route is sorted by created date
+   * @returns {boolean}
+   *
+   * This is a **UX decision** to only show the created date
+   * in the topic list when the user is viewing the created date filter.
+   * This is to avoid cluttering the mobile view with too much information.
+   */
   get currentOrderIsCreated() {
-    return this.session.topicList?.params.order === "created";
+    return this.router.currentRoute?.queryParams.order === "created";
   }
 
   get showCreatedDate() {
-    return (
-      (settings.enable_column_on_created_date_filter_only &&
-        this.currentOrderIsCreated) ||
-      !settings.enable_column_on_created_date_filter_only
-    );
+    if (
+      settings.enable_column_on_created_date_filter_only &&
+      !this.currentOrderIsCreated
+    ) {
+      return false;
+    }
+
+    if (
+      !this.topicTrackingState.filterCategory &&
+      settings.enable_column_in_home_page
+    ) {
+      // assume homepage
+      return true;
+    }
+
+    if (
+      settings.categories_to_display_created_column &&
+      this.topicTrackingState.filterCategory?.id
+    ) {
+      /** @type {number[]} */
+      const allow_cat = settings.categories_to_display_created_column
+        .split("|")
+        .filter(Boolean)
+        .map(Number);
+      if (allow_cat.includes(this.topicTrackingState.filterCategory?.id)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   get createdBumpedSame() {
@@ -42,21 +73,19 @@ export default class CreatedDateMobileItem extends Component {
   }
 
   <template>
-    {{#if this.currentOrderIsCreated}}
+    {{#if (and this.currentOrderIsCreated this.showCreatedDate)}}
       {{#unless this.createdBumpedSame}}
-        <div class="topic-item-stats__mobile-created-date age" data-has-created>
-          <a href={{@outletArgs.topic.lastPostUrl}}>{{formatDate
-              @outletArgs.topic.bumpedAt
-              format="tiny"
-              noTitle="true"
-            }}</a>
+        <span
+          class="topic-item-stats__mobile-created-date age"
+          data-has-created
+        >
           /
           <a href={{@outletArgs.topic.firstPostUrl}}>{{formatDate
               @outletArgs.topic.createdAt
               format="tiny"
               noTitle="true"
             }}</a>
-        </div>
+        </span>
       {{/unless}}
     {{/if}}
   </template>

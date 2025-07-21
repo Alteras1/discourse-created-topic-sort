@@ -90,5 +90,8 @@ export default apiInitializer("1.38.0", (api) => {
   );
 
   // outlet is only in mobile view
-  api.renderInOutlet("topic-list-after-main-link", CreatedDateMobileItem);
+  api.renderInOutlet(
+    "topic-list-item-mobile-bumped-at__after",
+    CreatedDateMobileItem
+  );
 });

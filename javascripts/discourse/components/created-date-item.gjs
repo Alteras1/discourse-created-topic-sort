@@ -8,15 +8,11 @@ import formatDate from "discourse/helpers/format-date";
 import lazyHash from "discourse/helpers/lazy-hash";
 
 export default class CreatedDateItem extends Component {
-  @service session;
+  @service router;
   @service site;
 
-  constructor() {
-    super(...arguments);
-  }
-
   get currentOrderIsCreated() {
-    return this.session.topicList?.params.order === "created";
+    return this.router.currentRoute?.queryParams.order === "created";
   }
 
   get showCreatedDate() {
