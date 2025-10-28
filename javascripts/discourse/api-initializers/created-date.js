@@ -12,7 +12,7 @@ export default apiInitializer("1.38.0", (api) => {
       name: "created_date",
       displayName: i18n(themePrefix("filters.created_date.title")),
       title: i18n(themePrefix("filters.created_date.help")),
-      before: "top",
+      before: settings.nav_bar_item_before,
       customFilter: (category) => {
         if (!category) {
           return settings.enable_nav_bar_item_in_home_page;
