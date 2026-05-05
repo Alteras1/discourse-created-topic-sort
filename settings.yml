@@ -36,6 +36,20 @@ categories_to_display_created_column:
   description:
     en: List of categories to display the "Created" column. Leave empty to display in all categories.
 
+tags_to_display_nav_bar_item:
+  default: ""
+  type: list
+  list_type: tag
+  description:
+    en: List of tags to display the "Sort by Created Date" nav bar item. Leave empty to display in all tags.
+
+tags_to_display_created_column:
+  default: ""
+  type: list
+  list_type: tag
+  description:
+    en: List of tags to display the "Created" column. Leave empty to display in all tags.
+
 nav_bar_item_before:
   default: "top"
   type: string
