@@ -13,9 +13,20 @@ export default apiInitializer("1.38.0", (api) => {
       displayName: i18n(themePrefix("filters.created_date.title")),
       title: i18n(themePrefix("filters.created_date.help")),
       before: settings.nav_bar_item_before,
-      customFilter: (category) => {
-        if (!category) {
+      customFilter: (category, args) => {
+        if (!category && !args.tag) {
           return settings.enable_nav_bar_item_in_home_page;
+        }
+
+        if (args.tag) {
+          /** @type string[] */
+          const allow_tags = settings.tags_to_display_nav_bar_item
+            .split("|")
+            .filter(Boolean);
+          if (allow_tags.length) {
+            return allow_tags.includes(args.tag.name);
+          }
+          return true;
         }
 
         /** @type number[] */
@@ -63,6 +74,25 @@ export default apiInitializer("1.38.0", (api) => {
         return cols;
       }
 
+      const currentTag =
+        router.currentRoute?.params?.tag_slug ||
+        router.currentRoute?.params?.tag_name;
+
+      if (currentTag) {
+        if (settings.tags_to_display_created_column) {
+          /** @type {string[]} */
+          const allow_tags = settings.tags_to_display_created_column
+            .split("|")
+            .filter(Boolean);
+          if (allow_tags.includes(currentTag)) {
+            cols.add("created", createdCol);
+          }
+        } else {
+          cols.add("created", createdCol);
+        }
+        return cols;
+      }
+
       if (!context.category) {
         // no category context, assume we are in home page
         if (settings.enable_column_in_home_page) {
@@ -71,7 +101,6 @@ export default apiInitializer("1.38.0", (api) => {
         return cols;
       }
 
-      // category context
       if (settings.categories_to_display_created_column) {
         /** @type {number[]} */
         const allow_cat = settings.categories_to_display_created_column
@@ -82,7 +111,6 @@ export default apiInitializer("1.38.0", (api) => {
           cols.add("created", createdCol);
         }
       } else {
-        // restrictions not set, display in all categories
         cols.add("created", createdCol);
       }
       return cols;

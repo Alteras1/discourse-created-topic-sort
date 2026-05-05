@@ -28,11 +28,25 @@ export default class CreatedDateMobileItem extends Component {
       return false;
     }
 
+    const currentTag =
+      this.router.currentRoute?.params?.tag_slug ||
+      this.router.currentRoute?.params?.tag_name;
+
+    if (currentTag) {
+      if (settings.tags_to_display_created_column) {
+        /** @type {string[]} */
+        const allow_tags = settings.tags_to_display_created_column
+          .split("|")
+          .filter(Boolean);
+        return allow_tags.includes(currentTag);
+      }
+      return true;
+    }
+
     if (
       !this.topicTrackingState.filterCategory &&
       settings.enable_column_in_home_page
     ) {
-      // assume homepage
       return true;
     }
 
