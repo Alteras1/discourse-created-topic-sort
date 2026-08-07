@@ -1,5 +1,5 @@
-import { and, eq, not, or } from "truth-helpers";
 import SortableColumn from "discourse/components/topic-list/header/sortable-column";
+import { and, eq, not, or } from "discourse/truth-helpers";
 
 const CreatedDateHeader = <template>
   {{#if
