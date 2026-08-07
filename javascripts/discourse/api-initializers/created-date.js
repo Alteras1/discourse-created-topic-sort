@@ -6,7 +6,7 @@ import CreatedDateHeader from "../components/created-date-header";
 import CreatedDateItem from "../components/created-date-item";
 import CreatedDateMobileItem from "../components/created-date-mobile-item";
 
-export default apiInitializer("1.38.0", (api) => {
+export default apiInitializer((api) => {
   if (settings.enable_sort_by_created_date_nav_bar_item) {
     api.addNavigationBarItem({
       name: "created_date",

@@ -1,11 +1,11 @@
 import Component from "@glimmer/component";
 import { getOwner } from "@ember/owner";
 import { service } from "@ember/service";
-import { htmlSafe } from "@ember/template";
+import { trustHTML } from "@ember/template";
 import PluginOutlet from "discourse/components/plugin-outlet";
-import concatClass from "discourse/helpers/concat-class";
-import formatDate from "discourse/helpers/format-date";
 import lazyHash from "discourse/helpers/lazy-hash";
+import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
+import dFormatDate from "discourse/ui-kit/helpers/d-format-date";
 
 export default class CreatedDateItem extends Component {
   @service router;
@@ -43,8 +43,8 @@ export default class CreatedDateItem extends Component {
     {{#unless this.mobileView}}
       {{#if this.showCreatedDate}}
         <td
-          title={{htmlSafe @topic.createdAtTitle}}
-          class={{concatClass
+          title={{trustHTML @topic.createdAtTitle}}
+          class={{dConcatClass
             "num topic-list-data created age"
             (if this.currentOrderIsCreated "filter-created")
           }}
@@ -55,7 +55,7 @@ export default class CreatedDateItem extends Component {
               @name="topic-list-before-relative-created-date"
               @outletArgs={{lazyHash topic=@topic}}
             />
-            {{~formatDate @topic.createdAt format="tiny" noTitle="true"~}}
+            {{~dFormatDate @topic.createdAt format="tiny" noTitle="true"~}}
           </a>
         </td>
       {{/if}}

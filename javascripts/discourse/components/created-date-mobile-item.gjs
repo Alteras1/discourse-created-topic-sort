@@ -1,8 +1,8 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
-import { and } from "truth-helpers";
-import formatDate from "discourse/helpers/format-date";
 import { relativeAge } from "discourse/lib/formatter";
+import { and } from "discourse/truth-helpers";
+import dFormatDate from "discourse/ui-kit/helpers/d-format-date";
 
 export default class CreatedDateMobileItem extends Component {
   @service router;
@@ -91,7 +91,7 @@ export default class CreatedDateMobileItem extends Component {
           data-has-created
         >
           /
-          <a href={{@outletArgs.topic.firstPostUrl}}>{{formatDate
+          <a href={{@outletArgs.topic.firstPostUrl}}>{{dFormatDate
               @outletArgs.topic.createdAt
               format="tiny"
               noTitle="true"
