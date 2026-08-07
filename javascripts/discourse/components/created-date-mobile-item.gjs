@@ -68,22 +68,19 @@ export default class CreatedDateMobileItem extends Component {
   }
 
   get createdBumpedSame() {
-    const bumpedRel = relativeAge(this.args.outletArgs.topic.bumpedAt);
-    const createdRel = relativeAge(this.args.outletArgs.topic.createdAt);
-    const BUMPED_FORMAT = "YYYY-MM-DD";
-    if (
-      moment(this.args.outletArgs.topic.bumpedAt).isValid() &&
-      moment(this.args.outletArgs.topic.createdAt).isValid()
-    ) {
-      const bumpedAtStr = moment(this.args.outletArgs.topic.bumpedAt).format(
-        BUMPED_FORMAT
-      );
-      const createdAtStr = moment(this.args.outletArgs.topic.createdAt).format(
-        BUMPED_FORMAT
-      );
-      return bumpedAtStr === createdAtStr && bumpedRel === createdRel;
+    const bumpedAt = this.args.outletArgs.topic.bumpedAt;
+    const createdAt = this.args.outletArgs.topic.createdAt;
+    const bumpedDate = new Date(bumpedAt);
+    const createdDate = new Date(createdAt);
+    if (isNaN(bumpedDate) || isNaN(createdDate)) {
+      return true;
     }
-    return true;
+    const bumpedRel = relativeAge(bumpedAt);
+    const createdRel = relativeAge(createdAt);
+    return (
+      bumpedDate.toDateString() === createdDate.toDateString() &&
+      bumpedRel === createdRel
+    );
   }
 
   <template>
