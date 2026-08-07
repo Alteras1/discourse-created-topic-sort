@@ -11,7 +11,7 @@ RSpec.describe "Created Topic Sort", type: :system do
   let(:discovery) { PageObjects::Pages::Discovery.new }
 
   describe "created column" do
-    context "on the home page" do
+    context "when on the home page" do
       it "shows the created column by default" do
         visit "/?order=created"
         expect(page).to have_css("th[data-sort-order='created']")
@@ -117,7 +117,7 @@ RSpec.describe "Created Topic Sort", type: :system do
     it "navigates to ?order=created when the nav bar item is clicked" do
       visit "/"
       find("#navigation-bar .nav-item_created_date a").click
-      expect(page).to have_current_path(%r{\?order=created})
+      expect(page).to have_current_path(/\?order=created/)
       expect(page).to have_css("#navigation-bar .nav-item_created_date.active")
     end
 

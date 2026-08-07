@@ -156,7 +156,11 @@ module(
 
       assert
         .dom(".topic-item-stats__mobile-created-date")
-        .hasAttribute("data-has-created", "", "span has data-has-created attribute");
+        .hasAttribute(
+          "data-has-created",
+          "",
+          "span has data-has-created attribute"
+        );
     });
   }
 );

@@ -34,9 +34,7 @@ module(
 
       assert
         .dom("th[data-sort-order='created']")
-        .exists(
-          "renders the created column header when setting is disabled"
-        );
+        .exists("renders the created column header when setting is disabled");
     });
 
     test("renders the sortable column when enable_column_on_created_date_filter_only is true and order is 'created'", async function (assert) {
